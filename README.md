@@ -29,5 +29,5 @@ Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&ut
 
 ## Strutcure of from Sidebar
 ```bash
-struture or path from here:  ChatRow(id) -> Links with chatid -> dynamic page we created to open those chat/[id]/page.tsx -> this page has the chat and chatInput -> chatInput we add doc to db -> chat we display from db
+struture or path:  ChatRow(id) -> Links with chatid -> dynamic page we created to open those chat/[id]/page.tsx -> this page has the chat and chatInput -> chatInput we add doc to db -> chat we display from db
 ```
