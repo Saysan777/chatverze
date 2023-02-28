@@ -25,3 +25,9 @@ pnpm create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+
+## Strutcure of from Sidebar
+```bash
+struture or path from here:  ChatRow(id) -> Links with chatid -> dynamic page we created to open those chat/[id]/page.tsx -> this page has the chat and chatInput -> chatInput we add doc to db -> chat we display from db
+```

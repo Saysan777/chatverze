@@ -10,7 +10,8 @@ import NewChat from './NewChat'
  
 function Sidebar() {
   const { data: session } = useSession();
-  console.log(session)
+
+  // struture or path from here:  ChatRow(id) -> Links with chatid -> dynamic page we created to open those chat/[id]/page.tsx -> this page has the chat and chatInput -> chatInput we add doc to db -> chat we display from db
 
   // database connection and get the chats from the collection        Also used react-firebase hooks to establish smooth connection
   const [ chats, loading, error ] = useCollection(
