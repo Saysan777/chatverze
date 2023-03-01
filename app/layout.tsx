@@ -1,5 +1,6 @@
 
 import { getServerSession } from 'next-auth'
+import ClientProvider from '../components/ClientProvider'
 import Login from '../components/Login'
 import { SessionProvider } from '../components/SessionProvider'
 import Sidebar from '../components/SideBar'
@@ -30,6 +31,8 @@ export default async function RootLayout({
             </div>
 
             {/* ClientProvider-Notification */}
+                <ClientProvider />       {/* it is called here so that if any toast method is called it will be shown in the layout  */ }
+
 
             <div className="bg-[#343541] flex-1">
               {children}
