@@ -4,6 +4,7 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/solid"
 import { addDoc, collection, serverTimestamp } from "firebase/firestore"
 import { useSession } from "next-auth/react"
 import { FormEvent, useState } from "react"
+import { toast } from "react-hot-toast"
 import { db } from "../firebase"
 
 type Props = {
@@ -42,20 +43,30 @@ function ChatInput({ chatId }: Props) {
         await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), message);
 
         // Toast notification
+        const notification = toast.loading('chatVerze is thinking...');   //it provides an id and stores it in notification variable
+
         await fetch('/api/askQuestion', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                prompt: input, chatId , model, session
+                prompt: input, 
+                chatId , 
+                model,
+                session
+            })
+        }).then(()=>{
+            // Toast notification successfull
+            toast.success('chatVerze has responded', {          //toast success will replace toast loading so we pass the loading id
+                id: notification
             })
         })
     }
 
   return (
     <div className="bg-gray-700/50 text-gray-400 rounded-lg text-sm">
-        <form onSubmit={e => sendMessage} className="p-5 space-x-5 flex">
+        <form onSubmit={sendMessage} className="p-5 space-x-5 flex">
             <input 
             value={prompt}
             className='bg-transparent focus:outline-none flex-1 disabled:cursor-not-allowed disabled:text-gray-300'
