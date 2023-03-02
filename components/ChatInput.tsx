@@ -17,7 +17,7 @@ function ChatInput({ chatId }: Props) {
     const { data: session } = useSession()
 
     // TODO: useSWR to get model
-    const model = 'text-davinci-003';
+    const model = 'gpt-3.5-turbo';
 
     // sendMessage to openAi api
     const sendMessage = async (e: FormEvent<HTMLFormElement>) =>{
@@ -45,6 +45,7 @@ function ChatInput({ chatId }: Props) {
         // Toast notification
         const notification = toast.loading('chatVerze is thinking...');   //it provides an id and stores it in notification variable
 
+        // Fetching data from our api we made 
         await fetch('/api/askQuestion', {
             method: 'POST',
             headers: {
