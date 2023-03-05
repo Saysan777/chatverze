@@ -13,7 +13,7 @@ function Login() {
         alt="logo"
          />
 
-         <button onClick={()=> signIn('google')} className="text-white font-bold text-3xl animate-pulse"> sign in to Chatverze</button>
+         <button onClick={()=> signIn('google')} className="text-white font-bold text-3xl animate-pulse"> Sign in to Chatverze</button>
     </div>
   )
 }
