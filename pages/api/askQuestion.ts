@@ -10,7 +10,7 @@ type Data = {
 // function(req,res) -> function (req:type, res:type) {}
 export default async function handler (
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse<Data>
 ) {
     const { prompt, chatId, model, session } =req.body;
     if(!prompt) {
@@ -25,8 +25,6 @@ export default async function handler (
 
     // chatGpt query
     const response = await query(prompt, chatId, model);
-    debugger;         
-    console.log(response);
 
     const message: Message = {
         text: response || 'chatVerze was unable to find an answer!',
@@ -40,5 +38,5 @@ export default async function handler (
     // old format of inserting the doc in collection -> concept clear to understand collection-> doc
     await adminDb.collection('users').doc(session?.user?.email).collection('chats').doc(chatId).collection('messages').add(message)
 
-    res.status(200).json({ name: 'alok aryal' });
+    res.status(200).json({ answer: message.text });
 }

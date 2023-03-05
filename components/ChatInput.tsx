@@ -6,18 +6,23 @@ import { useSession } from "next-auth/react"
 import { FormEvent, useState } from "react"
 import { toast } from "react-hot-toast"
 import { db } from "../firebase"
+import ModelSelection from "./ModelSelection";
+import useSwr from 'swr';
 
 type Props = {
     chatId: string
 }
 
-// chatId is the id of the docs from db from file /chat/[id]/page.tsx
+//* chatId is the id of the docs from db from file /chat/[id]/page.tsx
 function ChatInput({ chatId }: Props) {
     const [ prompt, setPrompt ] = useState('');
     const { data: session } = useSession()
 
     // TODO: useSWR to get model
-    const model = 'gpt-3.5-turbo';
+    //* getting cached data from swr
+    const { data: model } = useSwr('model',{
+        fallbackData: 'text-davinci-003'
+    })
 
     // sendMessage to openAi api
     const sendMessage = async (e: FormEvent<HTMLFormElement>) =>{
@@ -27,7 +32,7 @@ function ChatInput({ chatId }: Props) {
         const input = prompt.trim();
         setPrompt('');
 
-        // creating message object and defining its types : `Message` is defined in typind.d.ts
+        //* creating message object and defining its types : `Message` is defined in typind.d.ts
         const message: Message = {
             text: input,
             createdAt: serverTimestamp(),
@@ -38,14 +43,14 @@ function ChatInput({ chatId }: Props) {
             }
         }
 
-        // this is also creating a new Key in doc called 'messages' and adding the messages
-        //  collection(path, content)
+        //* this is also creating a new Key in doc called 'messages' and adding the messages
+        //*  collection(path, content)
         await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), message);
 
         // Toast notification
         const notification = toast.loading('chatVerze is thinking...');   //it provides an id and stores it in notification variable
 
-        // Fetching data from our api we made 
+        //* Fetching data from our api we made 
         await fetch('/api/askQuestion', {
             method: 'POST',
             headers: {
@@ -82,8 +87,8 @@ function ChatInput({ chatId }: Props) {
             </button>
         </form>
 
-        <div className="">
-            {/* Modal selections */}
+        <div className="md:hidden">
+           <ModelSelection />
         </div>
     </div>
   )

@@ -12,7 +12,7 @@ function NewChat() {
   const router = useRouter()
   const { data:session } = useSession();
   const createNewChat = async () => {
-    //  collection(db , path) users/email/chats   last parameter in the path is the collection
+    //*  collection(db , path) users/email/chats   last parameter in the path is the collection
     const doc = await addDoc(collection(db, 'users', session?.user?.email!, 'chats'), {
       userId: session?.user?.email!,
       createdAt: serverTimestamp()
