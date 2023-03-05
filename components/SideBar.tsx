@@ -37,7 +37,7 @@ function Sidebar() {
                     <div className="flex flex-col space-y-2 my-2">
                       {loading && (
                         <div className="animates-pulse text-center text-white">
-                          Loading Chats
+                          Loading Chats...
                         </div>
                       )}
 
