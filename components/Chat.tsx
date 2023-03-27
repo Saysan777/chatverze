@@ -24,7 +24,7 @@ function Chat({chatId}: Props) {
       { messages?.empty && (
         <>
           <p className="mt-10 text-center text-white">
-            Type a prompt in below to get started!
+            Type a prompt in below to get started! Happy searching
           </p>
             <ArrowDownCircleIcon className="h-1- w-10 mx-auto mt-5 text-white animate-bounce" />
         </>
